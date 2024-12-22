@@ -1,0 +1,294 @@
+body {
+  width: 300px;
+  padding: 16px 16px 0 16px;
+  font-family: "Outfit", system-ui, -apple-system, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main content area that can scroll */
+#shortcuts-container,
+#meeting-indicator {
+  overflow-y: auto;
+  margin-bottom: 16px;
+}
+
+.shortcut-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  margin: 8px 0;
+  background: #f1f5f9;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  user-select: none;
+}
+
+.shortcut-item:hover {
+  background: #e2e8f0;
+}
+
+.shortcut-item:active,
+.shortcut-item-active {
+  transform: scale(0.98);
+  background: #cbd5e1;
+}
+
+.shortcut-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.shortcut-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.shortcut-code {
+  background: #e2e8f0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.title-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.note {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 16px;
+}
+
+.configure-link {
+  display: block;
+  margin-top: 8px;
+  color: #4285f4;
+  text-decoration: none;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.configure-link:hover {
+  background-color: #f1f5f9;
+}
+
+.rate-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 8px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  color: #1a73e8;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.rate-link:hover {
+  background: #e8f0fe;
+  transform: translateY(-1px);
+}
+
+.rate-link svg {
+  width: 16px;
+  height: 16px;
+  fill: #fbbc04;
+}
+
+.not-set {
+  color: #64748b;
+  font-style: italic;
+}
+
+#toast {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 12px;
+  transition: transform 0.3s ease-out;
+  pointer-events: none;
+  display: none;
+}
+
+#toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+#caption {
+  display: block;
+  text-align: center;
+  margin-top: 8px;
+  color: #26be26;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Active meeting indicator styles */
+#meeting-indicator {
+  margin: 8px 0;
+  border-radius: 4px;
+}
+
+.active-meeting {
+  display: flex;
+  flex-direction: column;
+  background: #e6f4ea;
+  border: 1px solid #34a853;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 8px;
+}
+
+.active-meeting:last-child {
+  margin-bottom: 0;
+}
+
+.meeting-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.meeting-status {
+  color: #34a853;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.meeting-name {
+  color: #202124;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.meeting-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.meeting-shortcuts {
+  display: flex;
+  gap: 4px;
+}
+
+.meeting-shortcut {
+  background: none;
+  border: none;
+  padding: 6px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.meeting-shortcut:hover {
+  background: rgba(52, 168, 83, 0.1);
+}
+
+.meeting-shortcut .shortcut-icon {
+  width: 18px;
+  height: 18px;
+  color: #34a853;
+}
+
+.go-to-meeting {
+  background: #34a853;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.go-to-meeting:hover {
+  background: #2d9047;
+}
+
+/* RTL Support */
+[dir="rtl"] .shortcut-left {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .configure-link {
+  text-align: right;
+}
+
+/* Sticky footer */
+.sticky-footer {
+  position: sticky;
+  bottom: 0;
+  background: white;
+  margin: auto -16px 0;
+  padding: 16px;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sticky-footer .rate-link {
+  margin-top: 0;
+}
+
+.sticky-footer .configure-link {
+  margin-top: 0;
+}
+
+#message {
+  font-family: "Cairo", sans-serif;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8px 0 0;
+}
+
+#message img {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 5px;
+}

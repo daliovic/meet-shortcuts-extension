@@ -3,7 +3,7 @@ function getMessage(key) {
   return chrome.i18n.getMessage(key);
 }
 
-let activeMeetTab = null;
+let activeMeetTabs = [];
 
 // Shortcut configurations
 const SHORTCUT_ICONS = {
@@ -63,10 +63,12 @@ function createShortcutElement(command, shortcut) {
   return div;
 }
 
-// Execute command in active Meet tab
-async function executeCommand(command) {
+// Execute command in specified Meet tab or all tabs if no tabId provided
+async function executeCommand(command, tabId = null) {
   try {
-    const tabs = await chrome.tabs.query({ url: "https://meet.google.com/*" });
+    const tabs = tabId ? 
+      [await chrome.tabs.get(tabId)] : 
+      await chrome.tabs.query({ url: "https://meet.google.com/*" });
     
     if (tabs.length === 0) {
       showToast(getMessage('noMeetTab'));
@@ -74,15 +76,28 @@ async function executeCommand(command) {
     }
 
     // Add visual feedback
-    const element = document.querySelector(`[data-command="${command}"]`);
-    element.classList.add('shortcut-item-active');
-    setTimeout(() => element.classList.remove('shortcut-item-active'), 200);
+    const element = document.querySelector(`[data-command="${command}"]${tabId ? `[data-tab-id="${tabId}"]` : ''}`);
+    if (element) {
+      element.classList.add('shortcut-item-active');
+      setTimeout(() => element.classList.remove('shortcut-item-active'), 200);
+    }
 
     for (const tab of tabs) {
       try {
         await chrome.tabs.sendMessage(tab.id, { command });
       } catch (error) {
         console.error(`Error sending command to tab ${tab.id}:`, error);
+        // If content script isn't ready, try reinjecting it
+        try {
+          await chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            files: ["content.js"]
+          });
+          // Retry sending message after reinjecting
+          await chrome.tabs.sendMessage(tab.id, { command });
+        } catch (retryError) {
+          console.error(`Failed to reinject and retry for tab ${tab.id}:`, retryError);
+        }
       }
     }
   } catch (error) {
@@ -133,6 +148,10 @@ function initializeUI() {
   toast.id = 'toast';
   document.body.appendChild(toast);
 
+  // Create sticky footer container
+  const stickyFooter = document.createElement('div');
+  stickyFooter.className = 'sticky-footer';
+  
   // Add rating link
   const ratingLink = document.createElement('a');
   ratingLink.href = 'https://chromewebstore.google.com/detail/hhihlojiednpjklolomagbfoafbbaiih/reviews';
@@ -143,7 +162,16 @@ function initializeUI() {
     </svg>
     ${getMessage('rateExtension')}
   `;
-  document.querySelector('.note').after(ratingLink);
+  stickyFooter.appendChild(ratingLink);
+
+  // Move configure link and message to sticky footer
+  const configureLink = document.querySelector('.configure-link');
+  const message = document.querySelector('#message');
+  if (configureLink) stickyFooter.appendChild(configureLink);
+  if (message) stickyFooter.appendChild(message);
+
+  // Add sticky footer to document
+  document.body.appendChild(stickyFooter);
 
   // Add active meeting indicator
   const meetingIndicator = document.createElement('div');
@@ -151,18 +179,65 @@ function initializeUI() {
   meetingIndicator.style.display = 'none';
   meetingIndicator.innerHTML = `
     <div class="active-meeting">
-      <span>${getMessage('activeMeeting')}</span>
+      <div class="meeting-info">
+        <span class="meeting-status">${getMessage('activeMeeting')}</span>
+        <span class="meeting-name"></span>
+      </div>
       <button class="go-to-meeting">${getMessage('goToMeeting')}</button>
     </div>
   `;
   document.querySelector('.title').after(meetingIndicator);
 
-  // Check for active meeting
-  checkActiveMeeting();
+  // Check for active meetings
+  checkActiveMeetings();
 }
 
-// Check for active Meet tab
-async function checkActiveMeeting() {
+// Create meeting indicator element for a tab
+function createMeetingIndicator(tab) {
+  const meetingDiv = document.createElement('div');
+  meetingDiv.className = 'active-meeting';
+  meetingDiv.dataset.tabId = tab.id;
+
+  // Extract meeting name from title
+  const meetingName = tab.title
+    .replace(' - Google Meet', '')
+    .replace('Meet - ', '');
+
+  meetingDiv.innerHTML = `
+    <div class="meeting-info">
+      <span class="meeting-status">${getMessage('activeMeeting')}</span>
+      <span class="meeting-name">${meetingName}</span>
+    </div>
+    <div class="meeting-controls">
+      <button class="go-to-meeting">${getMessage('goToMeeting')}</button>
+      <div class="meeting-shortcuts"></div>
+    </div>
+  `;
+
+  // Add click handler for "Go to meeting" button
+  meetingDiv.querySelector('.go-to-meeting').onclick = () => {
+    chrome.tabs.update(tab.id, { active: true });
+    chrome.windows.update(tab.windowId, { focused: true });
+  };
+
+  // Add shortcut controls specific to this meeting
+  const shortcutsDiv = meetingDiv.querySelector('.meeting-shortcuts');
+  ['toggle-mic', 'toggle-camera', 'toggle-hand'].forEach(command => {
+    const button = document.createElement('button');
+    button.className = 'meeting-shortcut';
+    button.dataset.command = command;
+    button.dataset.tabId = tab.id;
+    button.innerHTML = SHORTCUT_ICONS[command];
+    button.title = SHORTCUT_NAMES[command];
+    button.onclick = () => executeCommand(command, tab.id);
+    shortcutsDiv.appendChild(button);
+  });
+
+  return meetingDiv;
+}
+
+// Check for active Meet tabs
+async function checkActiveMeetings() {
   const tabs = await chrome.tabs.query({ url: "https://meet.google.com/*" });
   const meetingIndicator = document.getElementById('meeting-indicator');
   
@@ -170,23 +245,39 @@ async function checkActiveMeeting() {
   const meetingTabs = tabs.filter(tab => !tab.url.includes('landing'));
   
   if (meetingTabs.length > 0) {
-    activeMeetTab = meetingTabs[0];
+    activeMeetTabs = meetingTabs;
     meetingIndicator.style.display = 'block';
-    
-    // Add click handler for "Go to meeting" button
-    document.querySelector('.go-to-meeting').onclick = () => {
-      chrome.tabs.update(activeMeetTab.id, { active: true });
-      chrome.windows.update(activeMeetTab.windowId, { focused: true });
-    };
+    meetingIndicator.innerHTML = ''; // Clear existing indicators
+
+    // Create indicator for each meeting tab
+    meetingTabs.forEach(tab => {
+      const indicator = createMeetingIndicator(tab);
+      meetingIndicator.appendChild(indicator);
+    });
   } else {
-    activeMeetTab = null;
+    activeMeetTabs = [];
     meetingIndicator.style.display = 'none';
   }
 }
 
+// Listen for tab updates to refresh meeting indicators
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (tab.url?.includes('meet.google.com') && changeInfo.status === 'complete') {
+    checkActiveMeetings();
+  }
+});
+
+// Listen for tab removals to refresh meeting indicators
+chrome.tabs.onRemoved.addListener(() => {
+  checkActiveMeetings();
+});
+
 // Handle links
 document.addEventListener('click', (e) => {
-  if (e.target.matches('.configure-link')) {
+  if (e.target.closest('.rate-link')) {
+    chrome.tabs.create({ url: e.target.closest('.rate-link').href });
+    e.preventDefault();
+  } else if (e.target.matches('.configure-link')) {
     if (e.target.href && e.target.href.startsWith('https://')) {
       chrome.tabs.create({ url: e.target.href });
     } else {

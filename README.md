@@ -2,28 +2,49 @@
 
 ![Meet Shortcuts Logo](icons/icon128.png)
 
-A Chrome extension that provides global keyboard shortcuts for Google Meet - control your meetings even when Chrome isn't your active window!
+A Chrome extension that provides global keyboard shortcuts for Google Meet - control multiple meetings simultaneously, even when Chrome isn't your active window!
 
 [![Available in the Chrome Web Store](https://storage.googleapis.com/web-dev-uploads/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/iNEddTyWiMfLSwFD6qGq.png)](https://chrome.google.com/webstore/detail/meet-shortcuts/nfkeopgdjgkefmabpchkebllpjhlkpha)
 
 ## Overview
 
-Meet Shortcuts enhances your Google Meet experience by providing convenient global keyboard shortcuts that work system-wide. Take control of your meetings with instant access to essential Google Meet functions, even when working in other applications!
+Meet Shortcuts enhances your Google Meet experience by providing convenient global keyboard shortcuts that work system-wide. Take control of multiple meetings simultaneously with instant access to essential Google Meet functions, even when working in other applications!
 
 ## Features
 
-- **Global Shortcuts**: Control Meet even when Chrome isn't focused
-- **Essential Controls**:
-  - Toggle microphone (Alt+Shift+U)
-  - Toggle camera (Alt+Shift+J)
-  - Raise/lower hand
-  - Toggle captions
-  - Show/hide reactions panel
+- **Multiple Meeting Support**:
+  - Control multiple Meet tabs simultaneously
+  - Individual controls for each meeting
+  - Quick switching between meetings
+  - Automatic tab detection and management
+
+- **Global Shortcuts**: 
+  - Control meetings even when Chrome isn't focused
+  - Works across all your active Meet tabs
+  - Default shortcuts:
+    - Toggle microphone (Alt+Shift+U)
+    - Toggle camera (Alt+Shift+J)
+    - And more customizable options
+
+- **Per-Meeting Controls**:
+  - Individual microphone toggle
+  - Camera controls
+  - Hand raise/lower
+  - Captions toggle
+  - Reactions panel
   - Quick meeting exit
-- **Zero Configuration**: Works right out of the box
-- **Customizable**: All shortcuts can be modified through Chrome's keyboard shortcuts settings
-- **Privacy-Focused**: No data collection, no analytics, no external services
-- **Lightweight**: Minimal resource usage
+
+- **Smart Features**:
+  - Zero configuration required
+  - Automatic meeting detection
+  - Seamless tab management
+  - Clean, intuitive interface
+
+- **Privacy & Performance**:
+  - No data collection
+  - No analytics
+  - No external services
+  - Lightweight resource usage
 
 ## Installation
 
