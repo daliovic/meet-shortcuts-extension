@@ -1,0 +1,62 @@
+{
+  "extName": {
+    "message": "اختصارات Meet",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "اختصارات عامة لـ Google Meet",
+    "description": "Extension description"
+  },
+  "toggleMic": {
+    "message": "تشغيل/إيقاف الميكروفون",
+    "description": "Toggle microphone button text"
+  },
+  "toggleCamera": {
+    "message": "تشغيل/إيقاف الكاميرا",
+    "description": "Toggle camera button text"
+  },
+  "toggleHand": {
+    "message": "رفع/خفض اليد",
+    "description": "Toggle hand button text"
+  },
+  "toggleCaptions": {
+    "message": "تشغيل/إيقاف الترجمة",
+    "description": "Toggle captions button text"
+  },
+  "toggleReactions": {
+    "message": "إظهار/إخفاء التفاعلات",
+    "description": "Toggle reactions button text"
+  },
+  "leaveCall": {
+    "message": "مغادرة المكالمة",
+    "description": "Leave call button text"
+  },
+  "globalShortcuts": {
+    "message": "تعمل الاختصارات بشكل عام، حتى عندما لا يكون Chrome نشطًا",
+    "description": "Global shortcuts note"
+  },
+  "configureShortcuts": {
+    "message": "تكوين اختصارات لوحة المفاتيح",
+    "description": "Configure shortcuts link text"
+  },
+  "notSet": {
+    "message": "غير محدد",
+    "description": "Text shown when shortcut is not set"
+  },
+  "noMeetTab": {
+    "message": "لم يتم العثور على تبويب Meet نشط",
+    "description": "Message shown when no Meet tab is found"
+  },
+  "activeMeeting": {
+    "message": "اجتماع نشط",
+    "description": "Active meeting indicator text"
+  },
+  "goToMeeting": {
+    "message": "الذهاب إلى الاجتماع",
+    "description": "Go to meeting button text"
+  },
+  "rateExtension": {
+    "message": "تقييم الإضافة",
+    "description": "Rate extension link text"
+  }
+}

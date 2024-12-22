@@ -1,0 +1,62 @@
+{
+  "extName": {
+    "message": "Meet Shortcuts",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "Global shortcuts for Google Meet",
+    "description": "Extension description"
+  },
+  "toggleMic": {
+    "message": "Toggle Microphone",
+    "description": "Toggle microphone button text"
+  },
+  "toggleCamera": {
+    "message": "Toggle Camera",
+    "description": "Toggle camera button text"
+  },
+  "toggleHand": {
+    "message": "Raise/Lower Hand",
+    "description": "Toggle hand button text"
+  },
+  "toggleCaptions": {
+    "message": "Toggle Captions",
+    "description": "Toggle captions button text"
+  },
+  "toggleReactions": {
+    "message": "Toggle Reactions",
+    "description": "Toggle reactions button text"
+  },
+  "leaveCall": {
+    "message": "Leave Call",
+    "description": "Leave call button text"
+  },
+  "globalShortcuts": {
+    "message": "Shortcuts work globally, even when Chrome is not focused",
+    "description": "Global shortcuts note"
+  },
+  "configureShortcuts": {
+    "message": "Configure keyboard shortcuts",
+    "description": "Configure shortcuts link text"
+  },
+  "notSet": {
+    "message": "Not set",
+    "description": "Text shown when shortcut is not set"
+  },
+  "noMeetTab": {
+    "message": "No active Meet tab found",
+    "description": "Message shown when no Meet tab is found"
+  },
+  "activeMeeting": {
+    "message": "Active Meeting",
+    "description": "Active meeting indicator text"
+  },
+  "goToMeeting": {
+    "message": "Go to meeting",
+    "description": "Go to meeting button text"
+  },
+  "rateExtension": {
+    "message": "Rate extension",
+    "description": "Rate extension link text"
+  }
+}

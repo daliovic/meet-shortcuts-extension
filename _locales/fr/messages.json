@@ -1,0 +1,62 @@
+{
+  "extName": {
+    "message": "Raccourcis Meet",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "Raccourcis globaux pour Google Meet",
+    "description": "Extension description"
+  },
+  "toggleMic": {
+    "message": "Activer/Désactiver le micro",
+    "description": "Toggle microphone button text"
+  },
+  "toggleCamera": {
+    "message": "Activer/Désactiver la caméra",
+    "description": "Toggle camera button text"
+  },
+  "toggleHand": {
+    "message": "Lever/Baisser la main",
+    "description": "Toggle hand button text"
+  },
+  "toggleCaptions": {
+    "message": "Activer/Désactiver les sous-titres",
+    "description": "Toggle captions button text"
+  },
+  "toggleReactions": {
+    "message": "Afficher/Masquer les réactions",
+    "description": "Toggle reactions button text"
+  },
+  "leaveCall": {
+    "message": "Quitter l'appel",
+    "description": "Leave call button text"
+  },
+  "globalShortcuts": {
+    "message": "Les raccourcis fonctionnent globalement, même lorsque Chrome n'est pas actif",
+    "description": "Global shortcuts note"
+  },
+  "configureShortcuts": {
+    "message": "Configurer les raccourcis clavier",
+    "description": "Configure shortcuts link text"
+  },
+  "notSet": {
+    "message": "Non défini",
+    "description": "Text shown when shortcut is not set"
+  },
+  "noMeetTab": {
+    "message": "Aucun onglet Meet actif trouvé",
+    "description": "Message shown when no Meet tab is found"
+  },
+  "activeMeeting": {
+    "message": "Réunion active",
+    "description": "Active meeting indicator text"
+  },
+  "goToMeeting": {
+    "message": "Aller à la réunion",
+    "description": "Go to meeting button text"
+  },
+  "rateExtension": {
+    "message": "Évaluer l'extension",
+    "description": "Rate extension link text"
+  }
+}
