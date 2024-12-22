@@ -4,50 +4,63 @@
 Control Google Meet with global keyboard shortcuts - manage your microphone, camera, and more, even when Chrome isn't your active window!
 
 ## Detailed Description
-Meet Shortcuts enhances your Google Meet experience by providing convenient global keyboard shortcuts that work even when Chrome isn't focused. Take control of your meetings with instant access to essential Google Meet functions!
+Meet Shortcuts is an open-source extension that revolutionizes your Google Meet experience by providing powerful global keyboard shortcuts that work even when Chrome isn't focused. Take command of your meetings with instant access to essential Google Meet functions!
 
-Key Features:
-• Toggle microphone on/off
-• Toggle camera on/off
-• Raise/lower hand
-• Toggle captions
-• Show/hide reactions panel
-• Quick meeting exit
+🚀 Key Features:
+• Toggle microphone on/off instantly
+• Control camera with a quick shortcut
+• Raise/lower hand effortlessly
+• Toggle captions on demand
+• Quick access to reactions panel
+• Instant meeting exit
+• Open source - community-driven development
 
-💡 Global Shortcuts:
-All shortcuts work system-wide - no need to switch to Chrome or find the Meet tab! Default shortcuts include:
+⌨️ Global Shortcuts:
+All shortcuts work system-wide - no need to switch to Chrome or find the Meet tab! Default shortcuts:
 - Alt+Shift+U: Toggle microphone
 - Alt+Shift+J: Toggle camera
-Other shortcuts are customizable through Chrome's keyboard shortcuts settings.
+Customize all shortcuts through Chrome's keyboard shortcuts settings.
 
-🎯 Perfect for:
-• Remote workers juggling multiple applications
-• Teachers managing virtual classrooms
-• Anyone who wants faster control over Meet functions
+👥 Perfect for:
+• Remote workers managing multiple applications
+• Teachers conducting virtual classrooms
+• Presenters needing seamless control
+• Anyone wanting efficient meeting management
 
 ✨ Benefits:
-• Save time with instant controls
-• Seamlessly manage meetings while using other apps
+• Instant control without window switching
+• Enhanced productivity during meetings
 • Clean, intuitive interface
-• Zero configuration required - works right out of the box
-• Fully customizable keyboard shortcuts
+• Zero setup required - works immediately
+• Fully customizable shortcuts
+• Open source transparency
 
-🔒 Privacy & Permissions:
-• Only activates on meet.google.com
-• No data collection
+🔒 Privacy First:
+• Activates only on meet.google.com
+• Zero data collection
 • No analytics
 • No external services
+• Open source code for full transparency
 
-💻 Technical Details:
+💻 Technical Excellence:
 • Lightweight and efficient
 • Robust error handling
-• Compatible with all versions of Google Meet
-• Regular updates to maintain compatibility
+• Regular compatibility updates
+• Community-driven improvements
+• Open source on GitHub
 
-Get more control over your Google Meet experience with Meet Shortcuts - the essential extension for productive remote meetings!
+🌟 Open Source:
+Meet Shortcuts is proudly open source! Check out our GitHub repository to:
+• View the source code
+• Contribute improvements
+• Report issues
+• Suggest features
+• Join our community
+
+Transform your Google Meet experience with Meet Shortcuts - the community-driven extension for productive remote meetings!
 
 ## Category
 Communication
 
 ## Tags
-google meet, keyboard shortcuts, productivity, remote work, video conferencing, meetings, google workspace, global shortcuts, hotkeys, virtual meetings
+google meet, keyboard shortcuts, productivity, remote work, video conferencing, meetings, google workspace, global shortcuts, hotkeys, virtual meetings, open source
